@@ -2,19 +2,8 @@
 
 **Master's thesis:** Few-shot semantic segmentation of woodlands in high-resolution aerial imagery.
 
-Prototypical network (ProtoNet) based **1-way 5-shot binary segmentation** on LandCover.ai v1 with woodland as the novel class.
+Prototypical network (ProtoNet) based **1-way 5-shot binary segmentation** on [LandCover.ai v1](https://landcover.ai/), with woodland as the novel class.
 
-# Dataset
-
-[LandCover.ai v1](https://landcover.ai.linuxpolska.com/) — 41 high-resolution aerial images (25–50 cm/pixel) over Poland.
-
-| Class | Role | Pixel ratio |
-|-------|------|-------------|
-| Background | — | 35.3% |
-| Building | Base (train) | 0.4% |
-| **Woodland** | **Novel (test)** | **58.6%** |
-| Water | Base (train) | 3.7% |
-| Road | Base (train) | 2.0% |
 
 ## Qualitative Results
 
@@ -50,15 +39,30 @@ woodland/
 │       └── tiles/{train,val,test}/{images,masks}/
 ├── notebooks/
 │   ├── EDA.ipynb          # Exploratory data analysis
-│   └── visualize.ipynb    # Qualitative result generation
+│   ├── visualize.ipynb    # Qualitative result generation
+│   └── training_curves.ipynb  # Training curve analysis
 ├── figures/
-│   └── qualitative_results/
+│   ├── qualitative_results/
+│   ├── training_curves/
+│   └── EDA/
 ├── Dockerfile             # PyTorch 2.1.0 + CUDA 11.8
 ├── run_altay.slurm        # HPC SLURM job script
 └── pyproject.toml         # Dependencies (Poetry)
 ```
 
 > **Note:** `data/` is not tracked in this repository. Dataset management via [DVC](https://dvc.org/) is planned.
+
+## Dataset
+
+[LandCover.ai v1](https://landcover.ai/) — 41 high-resolution aerial images (25–50 cm/pixel) over Poland.
+
+| Class | Role | Pixel ratio |
+|-------|------|-------------|
+| Background | — | 58.1% |
+| Building | Base (train) | 0.9% |
+| **Woodland** | **Novel (test)** | **33.3%** |
+| Water | Base (train) | 6.1% |
+| Road | Base (train) | 1.6% |
 
 ## Tech Stack
 
@@ -70,7 +74,6 @@ woodland/
 | Config management | Pydantic |
 | Containerization | Docker → Apptainer (HPC) |
 | HPC | NVIDIA A100 80GB, SLURM |
-
 
 ## Reproducibility
 

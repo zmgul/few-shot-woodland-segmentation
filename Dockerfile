@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir poetry
 # Copy only dependency files
 COPY pyproject.toml ./
 
-# Clean cache after installation
+# Install dependencies (torch/torchvision pinned in pyproject.toml, already in base image)
 RUN poetry config virtualenvs.create false \
     && poetry lock \
     && poetry install --no-interaction --no-ansi --no-root \
