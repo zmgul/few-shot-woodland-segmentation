@@ -25,29 +25,33 @@ Prototypical network (ProtoNet) based **1-way 5-shot binary segmentation** on [L
 woodland/
 ├── src/
 │   ├── __init__.py
-│   ├── config.py          # Pydantic config, all parameters
-│   ├── dataset.py         # 5-fold CV, cross-directory tile loading
-│   ├── model.py           # ProtoNet, dilated backbones (WIP)
-│   ├── utils.py           # FocalLoss, DiceLoss, metrics
-│   └── preprocess.py      # One-time: tiling + registry + kfold splits
-├── train.py               # Episode-based training, MLflow logging (WIP)
-├── eval.py                # 5-fold test evaluation (WIP)
-├── data/                  # Not tracked (see Data section)
+│   ├── config.py                       # Pydantic config, all parameters
+│   ├── dataset.py                      # 5-fold CV, cross-directory tile loading
+│   ├── model.py                        # ProtoNet, dilated backbones (WIP)
+│   ├── utils.py                        # FocalLoss, DiceLoss, metrics
+│   └── preprocess.py                   # One-time: tiling + registry + kfold splits
+├── train.py                            # Episode-based training, MLflow logging (WIP)
+├── eval.py                             # 5-fold test evaluation (WIP)
+├── data/                               # Not tracked (see Data section)
 │   └── processed/
 │       ├── image_level_split.json
 │       ├── tile_registry.json
 │       └── tiles/{train,val,test}/{images,masks}/
 ├── notebooks/
-│   ├── EDA.ipynb          # Exploratory data analysis
-│   ├── visualize.ipynb    # Qualitative result generation
-│   └── training_curves.ipynb  # Training curve analysis
+│   ├── 01_EDA.ipynb                    # Exploratory data analysis
+│   ├── 02_verify_pipeline.ipynb        # Data pipeline sanity checks
+│   ├── 03_training_dynamics.ipynb      # Training curve analysis
+│   ├── 04_quantitative_results.ipynb   # Aggregated metrics across folds
+│   └── visualize.ipynb                 # Qualitative result generation
 ├── figures/
+│   ├── EDA/
 │   ├── qualitative_results/
-│   ├── training_curves/
-│   └── EDA/
-├── Dockerfile             # PyTorch 2.1.0 + CUDA 11.8
-├── run_altay.slurm        # HPC SLURM job script
-└── pyproject.toml         # Dependencies (Poetry)
+│   ├── training_dynamics/
+│   └── verify_pipeline/
+├── Dockerfile                          # PyTorch 2.1.0 + CUDA 11.8
+├── run_altay.slurm                     # HPC SLURM training job
+├── run_eval.slurm                      # HPC SLURM evaluation job
+└── pyproject.toml                      # Dependencies (Poetry)
 ```
 
 > **Note:** `data/` is not tracked in this repository. Dataset management via [DVC](https://dvc.org/) is planned.
