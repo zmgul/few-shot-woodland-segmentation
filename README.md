@@ -75,6 +75,7 @@ few-shot-woodland-segmentation/
 ```
 
 Trained checkpoints are **not** included in this repository.
+
 🤗 Published on Hugging Face: [zmgul/few-shot-woodland-segmentation](https://huggingface.co/zmgul/few-shot-woodland-segmentation).
 
 ## Experiments and Results
@@ -92,9 +93,11 @@ The best configuration — SeCo-pretrained ResNet-50 (frozen) — achieves **fgI
 
 ## Reproducibility
 
-- **Docker** — [Dockerfile](Dockerfile) pins PyTorch 2.1.0 + CUDA 11.8 and installs Python dependencies via Poetry at build time. Converted to an Apptainer image for HPC execution by [scripts/build_image.slurm](scripts/build_image.slurm).
-- **Poetry** — dependencies and Python version constraint (`>=3.10,<3.15`) declared in [pyproject.toml](pyproject.toml); `torch` / `torchvision` pinned to the base image versions to prevent silent upgrades.
-- **Pydantic** — every hyperparameter and path is a validated field on the `WoodlandConfig` model in [src/config.py](src/config.py); invalid `BACKBONE`, `PRETRAINED`, or `UNFREEZE_FROM` values fail at import time rather than mid-run.
+| Tool | Role |
+|------|------|
+| Docker — [Dockerfile](Dockerfile) | Pins PyTorch 2.1.0 + CUDA 11.8; converted to Apptainer for HPC via [scripts/build_image.slurm](scripts/build_image.slurm) |
+| Poetry — [pyproject.toml](pyproject.toml) | Locks `torch` / `torchvision` to the base image to prevent silent upgrades |
+| Pydantic — [src/config.py](src/config.py) | `WoodlandConfig` validates all hyperparameters and paths at import time |
 
 ## Environment
 
