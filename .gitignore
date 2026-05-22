@@ -22,10 +22,9 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Data (large files, not tracked)
+# Data 
 data/
 *.tif
-*.tiff
 
 # Experiments (checkpoints, logs)
 experiments/
@@ -40,5 +39,3 @@ containers/
 .DS_Store
 Thumbs.db
 
-# Poetry
-poetry.lock

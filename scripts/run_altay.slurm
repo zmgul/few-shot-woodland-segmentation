@@ -9,7 +9,7 @@
 #SBATCH --output=slurm_logs/%j.out
 #SBATCH --error=slurm_logs/%j.err
 
-CONTAINER_IMAGE="$HOME/containers/woodland.sif"
+CONTAINER_IMAGE="$HOME/containers/woodland-ext.sif"
 WORK_DIR="$HOME/woodland"
 
 if [ ! -f "$CONTAINER_IMAGE" ]; then

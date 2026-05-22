@@ -143,7 +143,7 @@ class WoodlandConfig(BaseModel):
     # bigearthnet:  ResNet-50 trained on BigEarthNet (13-band → RGB)
     # seco:         ResNet-50 trained on SeCo (13-band → RGB)
     # cityscapes:   ResNet-50 trained on Cityscapes
-    PRETRAINED: str = "imagenet_v1"
+    PRETRAINED: str = "cityscapes"
 
     # External pretrained checkpoint directory (except imagenet_v1)
     PRETRAINED_CKPT_DIR: str = str(PROJECT_ROOT / "experiments" / "pretrained_weights")
@@ -159,10 +159,14 @@ class WoodlandConfig(BaseModel):
     INITIAL_TEMPERATURE: float = 10.0
 
     # UNFREEZE_FROM (VARIABLE — main experiment parameter):
-    # "none"   → Experiment A: entire backbone frozen, ~525K trainable params
-    # "layer4" → Experiment B: layer4 unfrozen, ~7.6M trainable params
-    # "layer3" → Experiment C: layer3+4 unfrozen, ~14.5M trainable params
-    UNFREEZE_FROM: str = "layer3"
+    # ResNet:
+    #   "none"   → entire backbone frozen
+    #   "layer4" → layer4 unfrozen
+    #   "layer3" → layer3+4 unfrozen
+    # Swin-T:
+    #   "stage4" → stage4 (features[6-7]) unfrozen
+    #   "stage3" → stage3+4 (features[4-7]) unfrozen
+    UNFREEZE_FROM: str = "none"
 
     # ══════════════════════════════════════════════════════════
     #  TRAINING HYPERPARAMETERS
@@ -281,8 +285,8 @@ class WoodlandConfig(BaseModel):
     @field_validator("UNFREEZE_FROM")
     @classmethod
     def validate_unfreeze(cls, v):
-        if v not in ("none", "layer4", "layer3"):
-            raise ValueError(f"Invalid: {v}. Options: none, layer4, layer3")
+        if v not in ("none", "layer4", "layer3", "stage4", "stage3"):
+            raise ValueError(f"Invalid: {v}. Options: none, layer4, layer3, stage4, stage3")
         return v
 
 
