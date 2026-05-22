@@ -74,11 +74,12 @@ few-shot-woodland-segmentation/
 └── README.md
 ```
 
-Trained checkpoints are **not** included in this repository. They are published on Hugging Face: [zmgul/few-shot-woodland-segmentation](https://huggingface.co/zmgul/few-shot-woodland-segmentation).
+Trained checkpoints are **not** included in this repository.
+🤗 Published on Hugging Face: [zmgul/few-shot-woodland-segmentation](https://huggingface.co/zmgul/few-shot-woodland-segmentation).
 
 ## Experiments and Results
 
-Four experiments were run, each as a 5-fold CV sweep with `seed=42`. Results are reported as mean ± std of `fgIoU` on the held-out test fold (woodland as novel class).
+Results are reported as mean ± std of `fgIoU` on the held-out test fold (woodland as novel class).
 
 | # | Experiment | Sweep |
 |---|------------|-------|
@@ -95,10 +96,11 @@ The best configuration — SeCo-pretrained ResNet-50 (frozen) — achieves **fgI
 - **Poetry** — dependencies and Python version constraint (`>=3.10,<3.15`) declared in [pyproject.toml](pyproject.toml); `torch` / `torchvision` pinned to the base image versions to prevent silent upgrades.
 - **Pydantic** — every hyperparameter and path is a validated field on the `WoodlandConfig` model in [src/config.py](src/config.py); invalid `BACKBONE`, `PRETRAINED`, or `UNFREEZE_FROM` values fail at import time rather than mid-run.
 
-## Tech Stack
+## Environment
 
 | Component | Tool |
 |-----------|------|
+| Python | >= 3.10, < 3.15 |
 | Framework | PyTorch 2.1.0 (CUDA 11.8) |
 | Vision models | torchvision 0.16.0, timm |
 | Experiment tracking | MLflow |
